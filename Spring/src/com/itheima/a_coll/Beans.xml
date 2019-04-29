@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:annotation-config />
+
+    <context:component-scan base-package="cn.cisol.mvcdemo">
+        <context:exclude-filter type="annotation"
+            expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+    <!-- P命名空间方法注入
+    		xmlns:p="http://www.springframework.org/schema/p"
+    	 <bean  p:属性名="属性值" p:属性名-ref="引用值">
+  
+ 					
+    -->
+  <bean name = "coll" class = "com.itheima.a_coll.Coll"  >
+  	<property name="str">
+  		<array>
+  			<value>张三</value>
+  			<value>王五</value>
+  		</array>
+  	</property>
+  	<property name="set">
+  		<set>
+  			<value>wangwu</value>
+  		</set>
+  	</property>
+  	<property name="map">
+  		<map>
+  			<entry key="jack" value="杰克"></entry>
+  		</map>
+  	</property>
+  	<property name="properties">
+  		<props>
+  			<prop key="rose">露丝</prop>
+  		</props>
+  	</property>
+  </bean>
+</beans>

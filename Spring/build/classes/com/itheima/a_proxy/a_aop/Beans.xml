@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:annotation-config />
+
+    <context:component-scan base-package="cn.cisol.mvcdemo">
+        <context:exclude-filter type="annotation"
+            expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+    
+  
+
+  <!--创建目标类  -->
+  <bean id="userService" class="com.itheima.a_proxy.a_aop.UserServiceImpl"></bean>
+  <!--  创建切面类-->
+  <bean id="myAspect" class="com.itheima.a_proxy.a_aop.MyAspect"></bean>
+  <!-- aop编程
+  		proxy-target-class="true":声明为cglib代理
+  		pointcut：切入点
+  		advice:通知,
+  		advisor：特殊切面，一个通知和一个切入点
+  				advice-ref:通知引用
+  				pointcut-ref：切入点引用
+  				切入点表达式 execution(  *    com.itheima.a_proxy.a_aop  .*     .*        (..)   )
+  							选择方法    返回值 包                                           类名任意 方法名任意 参数任意
+   -->
+	 <aop:config proxy-target-class="true">
+		<aop:pointcut expression="execution(* com.itheima.a_proxy.a_aop.*.*(..))" id="myPointCut"/>
+		<aop:advisor advice-ref="myAspect" pointcut-ref="myPointCut"/>
+	</aop:config>
+</beans>

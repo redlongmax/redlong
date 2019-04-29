@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:annotation-config />
+
+    <context:component-scan base-package="cn.cisol.mvcdemo">
+        <context:exclude-filter type="annotation"
+            expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+    <!-- P命名空间方法注入
+    		xmlns:p="http://www.springframework.org/schema/p"
+    	 <bean  p:属性名="属性值" p:属性名-ref="引用值">
+  
+ 					
+    -->
+  <bean name = "person" class = "com.itheima.a_P.Person" p:username="aser" p:age="13" p:address-ref="address">
+  
+  	<!-- <property name="address" ref="address"></property> -->
+  	
+  </bean>
+  <bean name="address" class="com.itheima.a_P.Address" p:tel="10086" p:addr="mala">
+  	
+  </bean>
+	
+</beans>

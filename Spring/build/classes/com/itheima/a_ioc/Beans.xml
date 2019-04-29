@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <context:annotation-config />
+
+    <context:component-scan base-package="cn.cisol.mvcdemo">
+        <context:exclude-filter type="annotation"
+            expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+    <!--
+      需要创建的id，创建实例的
+      -->
+    <bean id = "UserService" class = "com.itheima.a_ioc.UserServiceImpl" init-method="myInit" destroy-method="myDestroy" scope="prototype">
+    	<!-- <property name="bookDao" ref="BookDao"></property> -->
+    </bean>
+    <!-- <bean id = "BookDao" class = "com.itheima.a_ioc.BookDaoImpl"> </bean>
+    <bean id = "userFactory" class = "com.itheima.a_ioc.ServiceFactory" factory-method = "createUser"></bean> -->
+    <bean class="com.itheima.a_ioc.MyBeanPostProcesser"></bean>
+    
+</beans>
